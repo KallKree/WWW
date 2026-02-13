@@ -37,30 +37,45 @@
             position: relative; 
             width: 100%; 
             max-width: 500px;
-            height: 70vh; 
+            height: 75vh; 
         }
+        /* Photo3 теперь маленькая и СЗАДИ (z-index: 1) */
         .photo-main { 
-            z-index: 5; width: 60%; 
+            z-index: 1; 
+            width: 45%; 
             position: absolute; top: 50%; left: 50%; 
             transform: translate(-50%, -50%); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            filter: grayscale(10%);
         }
-        .scatter { position: absolute; width: 35%; filter: grayscale(20%); }
-        .p4 { top: 5%; left: 5%; transform: rotate(-10deg); }
-        .p5 { top: 10%; right: 5%; transform: rotate(15deg); }
-        .p6 { bottom: 15%; left: 8%; transform: rotate(-5deg); }
-        .p7 { bottom: 5%; right: 10%; transform: rotate(12deg); }
+        /* Photo 4,5,6,7 теперь БОЛЬШЕ и СПЕРЕДИ (z-index: 5) */
+        .scatter { position: absolute; width: 50%; z-index: 5; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 4px solid #fff; }
+        .p4 { top: 0%; left: 0%; transform: rotate(-10deg); }
+        .p5 { top: 5%; right: 0%; transform: rotate(15deg); }
+        .p6 { bottom: 10%; left: -5%; transform: rotate(-5deg); }
+        .p7 { bottom: 0%; right: -5%; transform: rotate(12deg); }
 
         /* PAGE 3 - RENAISSANCE */
         .renaissance-header {
             font-family: 'Great Vibes', cursive;
             font-size: clamp(2.5rem, 8vw, 4rem);
             text-align: center;
-            margin: 20px 0;
+            margin: 20px 0 10px 0;
             padding: 0 15px;
-            border-top: 1px solid #000;
-            border-bottom: 1px solid #000;
         }
+        
+        /* Вертикальный текст */
+        .vertical-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            text-align: center;
+        }
+        .vertical-text span { display: block; }
+
         .zigzag-container { 
             display: flex; 
             flex-direction: column; 
@@ -86,13 +101,13 @@
         }
 
         /* PAGE 4 - VIDEO */
-        #video-container { width: 100%; height: 100vh; background: #000; display: flex; align-items: center; }
-        video { width: 100%; height: 100%; object-fit: contain; }
+        #page4 { background: #000; padding: 0; }
+        video { width: 100%; height: 100vh; object-fit: contain; }
 
         /* ADAPTIVITY */
         @media (max-width: 600px) {
-            .photo-main { width: 70%; }
-            .scatter { width: 40%; }
+            .photo-main { width: 50%; }
+            .scatter { width: 55%; }
             .zigzag-img { width: 140px; }
         }
     </style>
@@ -109,8 +124,7 @@
             <img src="photo2.jpg" class="start-btn">
         </a>
     </section>
-
-    <section id="page2">
+  <section id="page2">
         <div class="collage-container">
             <img src="photo3.jpg" class="photo-main">
             <img src="photo4.jpg" class="scatter p4">
@@ -118,10 +132,19 @@
             <img src="photo6.jpg" class="scatter p6">
             <img src="photo7.jpg" class="scatter p7">
         </div>
-        <a href="#page3" style="color: #000; text-decoration: none; font-size: 20px;">⬇</a>
+        <a href="#page3" style="color: #000; text-decoration: none; font-size: 20px; margin-top: 20px;">⬇</a>
     </section>
-<section id="page3">
+
+    <section id="page3">
         <h1 class="renaissance-header">Happy Valentine's Day</h1>
+        <div class="vertical-text">
+            <span>THIS</span>
+            <span>IS</span>
+            <span>US</span>
+            <span>BY</span>
+            <span>THE</span>
+            <span>WAY</span>
+        </div>
         <div class="zigzag-container">
             <img src="photo8.jpg" class="zigzag-img left">
             <img src="photo9.jpg" class="zigzag-img right">
@@ -132,7 +155,7 @@
         <a href="#page4" class="next-btn" onclick="switchSound()">NEXT</a>
     </section>
 
-    <section id="page4" id="video-container">
+    <section id="page4">
         <video id="v1" loop playsinline>
             <source src="video1.mp4" type="video/mp4">
         </video>
@@ -147,14 +170,12 @@
         }
 
         function switchSound() {
-            // Плавно выключаем музыку
             let fadeOut = setInterval(() => {
                 if (audio.volume > 0.1) {
                     audio.volume -= 0.1;
                 } else {
                     audio.pause();
                     clearInterval(fadeOut);
-                    // Запускаем видео со звуком
                     video.muted = false;
                     video.play();
                 }
@@ -162,4 +183,4 @@
         }
     </script>
 </body>
-</html>
+</html>  
