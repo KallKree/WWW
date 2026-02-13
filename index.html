@@ -32,27 +32,25 @@
         /* PAGE 1 */
         .start-btn { cursor: pointer; transition: 0.3s; margin-top: 20px; }
 
-        /* PAGE 2 - COLLAGE */
+        /* PAGE 2 - COLLAGE (БЕЗ PHOTO3) */
         .collage-container { 
             position: relative; 
             width: 100%; 
             max-width: 500px;
             height: 75vh; 
         }
-        /* Photo3 теперь маленькая и СЗАДИ (z-index: 1) */
-        .photo-main { 
-            z-index: 1; 
-            width: 45%; 
-            position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%); 
-            filter: grayscale(10%);
+        .scatter { 
+            position: absolute; 
+            width: 55%; 
+            z-index: 5; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+            border: 4px solid #fff; 
+            background: #fff;
         }
-        /* Photo 4,5,6,7 теперь БОЛЬШЕ и СПЕРЕДИ (z-index: 5) */
-        .scatter { position: absolute; width: 50%; z-index: 5; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 4px solid #fff; }
-        .p4 { top: 0%; left: 0%; transform: rotate(-10deg); }
-        .p5 { top: 5%; right: 0%; transform: rotate(15deg); }
-        .p6 { bottom: 10%; left: -5%; transform: rotate(-5deg); }
-        .p7 { bottom: 0%; right: -5%; transform: rotate(12deg); }
+        .p4 { top: 5%; left: 5%; transform: rotate(-10deg); }
+        .p5 { top: 10%; right: 5%; transform: rotate(15deg); }
+        .p6 { bottom: 15%; left: 2%; transform: rotate(-5deg); }
+        .p7 { bottom: 5%; right: 2%; transform: rotate(12deg); }
 
         /* PAGE 3 - RENAISSANCE */
         .renaissance-header {
@@ -63,7 +61,6 @@
             padding: 0 15px;
         }
         
-        /* Вертикальный текст */
         .vertical-text {
             font-family: 'Playfair Display', serif;
             font-style: italic;
@@ -104,10 +101,8 @@
         #page4 { background: #000; padding: 0; }
         video { width: 100%; height: 100vh; object-fit: contain; }
 
-        /* ADAPTIVITY */
         @media (max-width: 600px) {
-            .photo-main { width: 50%; }
-            .scatter { width: 55%; }
+            .scatter { width: 60%; }
             .zigzag-img { width: 140px; }
         }
     </style>
@@ -124,9 +119,9 @@
             <img src="photo2.jpg" class="start-btn">
         </a>
     </section>
-  <section id="page2">
+
+    <section id="page2">
         <div class="collage-container">
-            <img src="photo3.jpg" class="photo-main">
             <img src="photo4.jpg" class="scatter p4">
             <img src="photo5.jpg" class="scatter p5">
             <img src="photo6.jpg" class="scatter p6">
@@ -166,7 +161,7 @@
         const video = document.getElementById("v1");
 
         function playMusic() {
-            audio.play().catch(e => console.log("Нужен клик для звука"));
+            audio.play().catch(e => console.log("Music needs click"));
         }
 
         function switchSound() {
@@ -183,4 +178,4 @@
         }
     </script>
 </body>
-</html>  
+</html>
